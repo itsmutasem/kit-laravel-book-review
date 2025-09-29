@@ -2,7 +2,8 @@
     <main>
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             <div class="bg-neutral-800/30 p-8 rounded-md shadow-lg shadow-black/50">
-                <form>
+                <form method="POST" action="{{ route('books.store') }}">
+                    @csrf
                     <div class="space-y-12">
                         <div class="border-b border-white/10 pb-12">
                             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
