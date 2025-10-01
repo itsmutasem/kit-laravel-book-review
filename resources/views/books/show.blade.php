@@ -1,0 +1,1 @@
+<x-layout :title=" $book->title "></x-layout>
