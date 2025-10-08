@@ -9,5 +9,4 @@ Route::get('/', function () {
 });
 
 Route::resource('books', BookController::class);
-
-Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
+Route::resource('reviews', ReviewController::class);

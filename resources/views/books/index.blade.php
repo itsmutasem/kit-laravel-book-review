@@ -41,6 +41,10 @@
                 <h1 class="text-white text-2xl font-bold mb-3">No books yet!</h1>
             @endforelse
 
+            <div class="mt-4">
+                {{ $books->links() }}
+            </div>
+
         </div>
 
     </main>

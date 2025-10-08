@@ -3,29 +3,27 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Book extends Model
+class Reviews extends Model
 {
-    use HasFactory, HasUuids;
+    use HasUuids;
     // UUID
     public $incrementing = false;
     protected $keyType = 'string';
-    
+
     //table
-    protected $table = 'books';
+    protected $table = 'reviews';
 
     // fillable fields
     protected $fillable = [
-        'title',
-        'description',
+        'content',
+        'book_id',
         'author',
     ];
-
-    public function reviews()
+    
+    public function book()
     {
-        return $this->hasMany(Reviews::class);
+        return $this->belongsTo(Book::class);
     }
-
 }
