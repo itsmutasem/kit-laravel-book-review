@@ -9,4 +9,8 @@ Route::get('/', function () {
 });
 
 Route::resource('books', BookController::class);
-Route::resource('reviews', ReviewController::class);
+// Route::resource('reviews', ReviewController::class);
+
+Route::post('reviews', [ReviewController::class, 'store'])->name('reviews.store');
+Route::delete('reviews/{id}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+Route::get('reviews', [ReviewController::class, 'index'])->name('reviews.index');

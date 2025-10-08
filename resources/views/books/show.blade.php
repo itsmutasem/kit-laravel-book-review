@@ -17,6 +17,13 @@
                                 {{ session('create') }}
                             </p>
                         </div>
+                    @elseif (session('delete'))
+                        <div>
+                            <p
+                                class="text-red-500 font-semibold border-2 border-red-600 px-3 py-1 rounded-md bg-red-950">
+                                {{ session('delete') }}
+                            </p>
+                        </div>
                     @endif
                 </div>
 
@@ -36,20 +43,27 @@
                             <button type="submit"
                                 class="bg-indigo-600 text-white px-3 py-1.5 rounded-md hover:bg-indigo-700 text-sm">Add</button>
                         </div>
+                    </form>
                 </div>
 
-                
-                    @forelse ($book->reviews as $reviews)
-                        <div class="mt-8 bg-neutral-950/50 p-4 rounded-md shadow-md shadow-black/50">
-                            <h3 class="text-white">{{ $reviews->content }}</h3>
-                            <p class="text-white/60 text-sm">{{ $reviews->author }}</p>
-                        </div>        
-                    @empty
-                        <div class="mt-8 bg-neutral-950/50 p-4 rounded-md shadow-md shadow-black/50">
-                            <h3 class="text-white">No reviews yet!</h3>
-                        </div>
-                    @endforelse
-                </div>
+
+                @forelse ($book->reviews as $reviews)
+                    <div class="mt-8 bg-neutral-950/50 p-4 rounded-md shadow-md shadow-black/50">
+                        <h3 class="text-white">{{ $reviews->content }}</h3>
+                        <p class="text-white/60 text-sm">{{ $reviews->author }}</p>
+                        <form action="{{ route('reviews.destroy', $reviews->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="book_id" value="{{ $book->id }}">
+                            <input type="submit" class="text-red-500" value="Delete">
+                        </form>
+                    </div>
+                @empty
+                    <div class="mt-8 bg-neutral-950/50 p-4 rounded-md shadow-md shadow-black/50">
+                        <h3 class="text-white">No reviews yet!</h3>
+                    </div>
+                @endforelse
             </div>
+        </div>
     </main>
 </x-layout>

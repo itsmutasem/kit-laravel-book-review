@@ -25,4 +25,11 @@ class ReviewController extends Controller
 
         return redirect()->route('books.show', $request['book_id'])->with('create', 'Review added successfully!');
     }
+
+    public function destroy(Request $request, string $id)
+    {
+        $review = Reviews::findOrFail($id);
+        $review->delete();
+        return redirect()->route('books.show', $request['book_id'])->with('delete', 'Review deleted successfully!');
+    }
 }
