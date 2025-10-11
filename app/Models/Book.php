@@ -12,7 +12,7 @@ class Book extends Model
     // UUID
     public $incrementing = false;
     protected $keyType = 'string';
-    
+
     //table
     protected $table = 'books';
 
@@ -20,12 +20,17 @@ class Book extends Model
     protected $fillable = [
         'title',
         'description',
-        'author',
+        'user_id',
     ];
 
     public function reviews()
     {
         return $this->hasMany(Reviews::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
 }

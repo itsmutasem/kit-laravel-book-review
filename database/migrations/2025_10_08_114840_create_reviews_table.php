@@ -14,12 +14,15 @@ return new class extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->text('content');
-            $table->string('author');
 
             // Foreign key to books table
             $table->uuid('book_id');
             $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
-            
+
+            // Foreign key to users table
+            $table->uuid('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

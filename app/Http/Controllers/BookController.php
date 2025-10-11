@@ -51,5 +51,5 @@ class BookController extends Controller
         $book = Book::findOrFail($id);
         $book->delete();
         return redirect()->route('books.index')->with('delete', 'Book deleted successfully!');
-    }    
+    }
 }
