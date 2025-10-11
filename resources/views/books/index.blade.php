@@ -19,7 +19,7 @@
                         {{ session('delete') }}
                     </p>
             </div>
-            @endif 
+            @endif
             <div class="flex justify-end mb-4">
                 <a href="{{ route('books.create') }}" class="text-green-500 font-semibold border-2 border-green-600 px-3 py-1 rounded-md hover:bg-green-950">Create</a>
             </div>
@@ -30,11 +30,11 @@
                     <p class="text-white/50 text-sm">Author: {{ $book->author }}</p>
                 </div>
                 <div class="flex-inline justify-self-end col-span-2 col-end-7 mt-5 space-x-4">
-                    <a href="{{  route('books.edit', $book->id) }}" class="text-blue-500">Edit</a>
+                    <a href="{{  route('books.edit', $book->id) }}" class="text-blue-500 hover:text-blue-700">Edit</a>
                     <form action="{{ route('books.destroy', $book->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure want to delete this book?');">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="text-red-500" >Delete</button>
+                        <button type="submit" class="text-red-500 hover:text-red-700">Delete</button>
                 </div>
             </div>
             @empty

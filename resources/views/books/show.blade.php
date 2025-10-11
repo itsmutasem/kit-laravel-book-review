@@ -48,21 +48,27 @@
 
 
                 @forelse ($book->reviews as $reviews)
-                    <div class="mt-8 bg-neutral-950/50 p-4 rounded-md shadow-md shadow-black/50">
-                        <h3 class="text-white">{{ $reviews->content }}</h3>
-                        <p class="text-white/60 text-sm">{{ $reviews->author }}</p>
-                        <form action="{{ route('reviews.destroy', $reviews->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <input type="hidden" name="book_id" value="{{ $book->id }}">
-                            <input type="submit" class="text-red-500" value="Delete">
-                        </form>
+                    <div class="mt-8 bg-neutral-950/50 p-4 rounded-md shadow-md shadow-black/50 grid grid-cols-6 gap-4 items-center">
+                        <div class="col-span-5">
+                            <h3 class="text-white font-simebold text-lg">{{ $reviews->content }}</h3>
+                            <p class="text-white/60 text-sm">By: {{ $reviews->author }}</p>
+                        </div>
+
+                        <div class="col-span-1 text-right">
+                            <form action="{{ route('reviews.destroy', $reviews->id) }}" method="POST" onsubmit="return confirm('Are you sure want to delete this review?');">
+                                @csrf
+                                @method('DELETE')
+                                <input type="hidden" name="book_id" value="{{ $book->id }}">
+                                <input type="submit" class="text-red-500 hover:text-red-700" value="Delete">
+                            </form>
+                        </div>
                     </div>
                 @empty
                     <div class="mt-8 bg-neutral-950/50 p-4 rounded-md shadow-md shadow-black/50">
                         <h3 class="text-white">No reviews yet!</h3>
                     </div>
                 @endforelse
+
             </div>
         </div>
     </main>
