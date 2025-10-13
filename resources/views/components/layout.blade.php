@@ -27,7 +27,14 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-4 flex items-center md:ml-6">
+                        @if(auth()->user())
+                            <div>
+                            <p class="text-white mr-4">{{ auth()->user()->name }}</p>
+                            </div>
+                            <a href="" class="text-white bg-red-950/60 rounded-md px-3 py-2 text-sm font-medium hover:bg-red-900">Logout</a>
+                        @else
                         <a href="" class="text-white bg-blue-950/60 rounded-md px-3 py-2 text-sm font-medium hover:bg-blue-900">Login</a>
+                        @endif
                     </div>
                 </div>
             </div>

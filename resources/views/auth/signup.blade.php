@@ -1,5 +1,5 @@
  <x-auth-layout>
-     <form method="" action="">
+     <form method="POST" action="{{ route('auth.signupStore') }}">
          @csrf
          <div class="space-y-8">
              <div class="grid grid-cols-1 gap-y-6">
@@ -72,7 +72,7 @@
                                  <input
                                      id="password"
                                      :type="show ? 'text' : 'password'"
-                                     name="password"
+                                     name="password_confirmation"
                                      class="{{ $errors->has('password') ? 'outline-red-600' : 'outline-white/10' }} block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-700 sm:text-sm/6"
                                  >
                                  <button type="button"

@@ -1,5 +1,6 @@
 <x-auth-layout :title="'Login'">
-    <form action="#" method="POST" class="space-y-6">
+    <form action="{{ route('auth.loginStore') }}" method="POST" class="space-y-6">
+        @csrf
         <div>
             <label for="email" class="block text-sm/6 font-medium text-white">Email</label>
             <div class="mt-2">
@@ -43,6 +44,10 @@
                 </div>
             </div>
             @error('password')
+            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+            @enderror
+
+            @error('auth-error')
             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
             @enderror
         </div>
