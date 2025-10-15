@@ -9,7 +9,8 @@ class ReviewController extends Controller
 {
     public function index()
     {
-        return view('reviews.index');
+        $reviews = Reviews::where('user_id', auth()->id())->latest()->paginate(5);
+        return view('reviews.index', compact('reviews'));
     }
 
     public function store(Request $request)
@@ -20,7 +21,7 @@ class ReviewController extends Controller
         Reviews::create([
             'content' => $data['content'],
             'book_id' => $request['book_id'],
-            'author' => 'Yazeed',
+            'user_id' => auth()->id(),
         ]);
 
         return redirect()->route('books.show', $request['book_id'])->with('create', 'Review added successfully!');

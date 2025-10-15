@@ -7,7 +7,7 @@
                     <div class="space-y-12">
                         <div class="border-b border-white/10 pb-12">
                             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                                <div class="sm:col-span-3">
+                                <div class="sm:col-span-6">
                                     <label for="title" class="block text-sm/6 font-medium text-white">Title</label>
                                     <div class="mt-2">
                                         <input id="title" type="text" name="title" value="{{ old('title') }}" class=" {{ $errors->has('title') ? 'outline-red-600' : 'outline-white/10' }} block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-green-700 sm:text-sm/6" />
@@ -17,15 +17,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="sm:col-span-3">
-                                    <label for="author" class="block text-sm/6 font-medium text-white">Author</label>
-                                    <div class="mt-2">
-                                        <input id="author" type="text" name="author" value="{{ old('author') }}" class=" {{ $errors->has('author') ? 'outline-red-600' : 'outline-white/10' }} block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-green-700 sm:text-sm/6" />
-                                    </div>
-                                    @error('author')
-                                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                                    @enderror
-                                </div>
+
                             </div>
 
                             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">

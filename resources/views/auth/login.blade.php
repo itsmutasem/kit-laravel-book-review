@@ -58,7 +58,7 @@
         <div>
             <p class="mt-2 text-center text-sm text-gray-500">
                 Don't have an account?
-                <a href="{{ route('auth.signup') }}" class="font-medium text-indigo-500 hover:text-indigo-400">Sign up</a>
+                <a href="{{ route('signup') }}" class="font-medium text-indigo-500 hover:text-indigo-400">Sign up</a>
             </p>
         </div>
     </form>

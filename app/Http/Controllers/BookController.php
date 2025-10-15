@@ -22,7 +22,11 @@ class BookController extends Controller
     public function store(BookRequest $request)
     {
         $data = $request->validated();
-        Book::create($data);
+        Book::create([
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'user_id' => auth()->id(),
+        ]);
         return redirect()->route('books.index')->with('create', 'Book created successfully!');
     }
 
@@ -35,7 +39,10 @@ class BookController extends Controller
     public function edit($id)
     {
         $book = Book::findOrFail($id);
-        return view('books.edit', compact('book'));
+        if ($book->user_id == auth()->id() || auth()->user()->role == 'admin') {
+            return view('books.edit', compact('book'));
+        }
+        abort(403, 'Unauthorized action.');
     }
 
     public function update(BookRequest $request, string $id)

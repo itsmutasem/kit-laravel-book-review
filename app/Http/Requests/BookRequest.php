@@ -23,7 +23,6 @@ class BookRequest extends FormRequest
     {
         return [
             'title' =>'required',
-            'author' => 'required',
             'description' => 'bail|required|min:10|max:1000',
         ];
     }
@@ -32,7 +31,6 @@ class BookRequest extends FormRequest
     {
         return [
             'title.required' => 'The book title field is required.',
-            'author.required' => 'The author field is required.',
             'description.required' => 'The description field is required.',
             'description.min' => 'The description must be at least :min characters.',
             'description.max' => 'The description may not be greater than :max characters.',

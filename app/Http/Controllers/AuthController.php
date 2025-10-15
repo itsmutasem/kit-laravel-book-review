@@ -21,7 +21,7 @@ class AuthController extends Controller
     {
         $data = $request->validated();
         User::create($data);
-        return redirect()->route('books.index')->with('create', 'Your account created successfully!');
+        return redirect()->route('login');
     }
 
     public function loginPage()
@@ -37,5 +37,11 @@ class AuthController extends Controller
             return redirect()->route('books.index');
         }
         return back()->withErrors(['auth-error' => 'The provided credentials do not match our records.']);
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+        return redirect()->route('login');
     }
 }

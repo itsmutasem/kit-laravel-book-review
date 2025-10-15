@@ -5,7 +5,7 @@
                 <h3 class="text-white text-lg">Description:</h3>
                 <h3 class="text-white text-sm">{{ $book->description }}</h3>
                 <div class="mt-1">
-                    <p class="text-white/60 text-sm">{{ $book->author . ' - ' . $book->created_at->format('M d, Y') }}
+                    <p class="text-white/60 text-sm">{{ $book->user->name . ' - ' . $book->created_at->format('M d, Y') }}
                     </p>
                 </div>
 
@@ -28,6 +28,7 @@
                 </div>
 
                 {{-- add review --}}
+                @auth()
                 <div class="mt-8 bg-neutral-950/50 p-4 rounded-md shadow-md shadow-black/50">
                     <h3 class="text-white text-lg mb-2">Add a Review</h3>
                     <form action="{{ route('reviews.store') }}" method="POST">
@@ -45,15 +46,18 @@
                         </div>
                     </form>
                 </div>
+                @endauth
 
-
+                {{-- reviews --}}
                 @forelse ($book->reviews as $reviews)
                     <div class="mt-8 bg-neutral-950/50 p-4 rounded-md shadow-md shadow-black/50 grid grid-cols-6 gap-4 items-center">
                         <div class="col-span-5">
                             <h3 class="text-white font-simebold text-lg">{{ $reviews->content }}</h3>
-                            <p class="text-white/60 text-sm">By: {{ $reviews->author }}</p>
+                            <p class="text-white/60 text-sm">By: {{ $reviews->user->name }}</p>
                         </div>
 
+                        @auth
+                        @if(auth()->user()->role == 'admin')
                         <div class="col-span-1 text-right">
                             <form action="{{ route('reviews.destroy', $reviews->id) }}" method="POST" onsubmit="return confirm('Are you sure want to delete this review?');">
                                 @csrf
@@ -62,6 +66,8 @@
                                 <input type="submit" class="text-red-500 hover:text-red-700" value="Delete">
                             </form>
                         </div>
+                        @endif
+                        @endauth
                     </div>
                 @empty
                     <div class="mt-8 bg-neutral-950/50 p-4 rounded-md shadow-md shadow-black/50">

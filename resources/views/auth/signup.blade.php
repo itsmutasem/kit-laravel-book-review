@@ -107,7 +107,7 @@
          <div>
              <p class="mt-2 text-center text-sm text-gray-500">
                  Already have an account?
-                 <a href="{{ route('auth.login') }}" class="font-medium text-indigo-500 hover:text-indigo-400">Login</a>
+                 <a href="{{ route('login') }}" class="font-medium text-indigo-500 hover:text-indigo-400">Login</a>
              </p>
          </div>
      </form>

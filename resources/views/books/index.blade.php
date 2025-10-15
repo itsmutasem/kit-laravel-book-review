@@ -20,21 +20,32 @@
                     </p>
             </div>
             @endif
-            <div class="flex justify-end mb-4">
-                <a href="{{ route('books.create') }}" class="text-green-500 font-semibold border-2 border-green-600 px-3 py-1 rounded-md hover:bg-green-950">Create</a>
-            </div>
+            @auth
+                @if(auth()->user()->role == 'admin' || auth()->user()->role == 'writer')
+                    <div class="flex justify-end mb-4">
+                        <a href="{{ route('books.create') }}" class="text-green-500 font-semibold border-2 border-green-600 px-3 py-1 rounded-md hover:bg-green-950">Create</a>
+                    </div>
+               @endif
+            @endauth
             @forelse ($books as $book)
             <div class="bg-neutral-800/30 p-8 rounded-md grid grid-cols-6 gap-4 mb-4 shadow-lg shadow-black/50">
                 <div class="col-start-1 col-end-3">
-                    <a href="{{  route('books.show', $book->id) }}" class="text-white text-2xl font-bold mb-3">{{ $book->title }}</h1>
-                    <p class="text-white/50 text-sm">Author: {{ $book->author }}</p>
+                    <a href="{{  route('books.show', $book->id) }}" class="text-white text-2xl font-bold mb-3">{{ $book->title }}</a>
+                    <p class="text-white/50 text-sm">Author: {{ $book->user->name }}</p>
                 </div>
                 <div class="flex-inline justify-self-end col-span-2 col-end-7 mt-5 space-x-4">
+                    @auth()
+                    @if(auth()->user()->role == 'admin' || auth()->id() == $book->user->id)
                     <a href="{{  route('books.edit', $book->id) }}" class="text-blue-500 hover:text-blue-700">Edit</a>
-                    <form action="{{ route('books.destroy', $book->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure want to delete this book?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="text-red-500 hover:text-red-700">Delete</button>
+                    @endif
+                        @if(auth()->user()->role == 'admin')
+                        <form action="{{ route('books.destroy', $book->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure want to delete this book?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-500 hover:text-red-700">Delete</button>
+                        </form>
+                        @endif
+                    @endauth
                 </div>
             </div>
             @empty
